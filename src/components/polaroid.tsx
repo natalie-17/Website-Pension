@@ -18,7 +18,7 @@ const Polaroid: Component<PolaroidProps> = (props: PolaroidProps) => {
   return (
     <>
         <h1>ueberschrift</h1>
-        <img src="bild" alt="alt_tag" />
+        <img src="/2026-Honigwabe.jpeg" alt="alt_tag" />
         <p>polaroid.beschreibung</p>
     </>
   );
