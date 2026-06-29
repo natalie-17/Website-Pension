@@ -2,8 +2,9 @@
 import './index.css';
 import { render } from 'solid-js/web';
 import 'solid-devtools';
-
-import App from './App';
+import { Route, Router } from '@solidjs/router';
+import Homepage from './pages/homepage';
+import NotFound from './pages/404';
 
 const root = document.getElementById('root');
 
@@ -13,4 +14,9 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <App />, root!);
+render(() => (
+  <Router>
+    <Route path="/" component={Homepage}/>
+    <Route path="*" component={NotFound} />
+  </Router>),
+  root!);
