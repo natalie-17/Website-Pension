@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     color: whitesmoke;
+    text-align: justify;
 }
 
 body{
@@ -16,6 +17,7 @@ main{
     
     min-height: calc(100vh - 58px - 20px);
     margin-block: 5px;
+    padding: 10px;
 }
 
 section h1{
@@ -75,4 +77,36 @@ nav ul li a:hover{
 }
 .dropdown:hover .dropdown-content{
     display: block;
+}
+.polaroid{
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 25px 25px 25px 25px;
+    padding: 10px;
+}
+.polaroid img{
+    width: 100%;
+    aspect-ratio: 1.5;
+    object-fit: cover;
+    object-position: center;
+}
+.container{
+    text-align: center;
+    padding: 10px 20px;
+}
+.container *{
+    color: black;
+    text-align: center;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 0 15px;
+  gap: 30px;
+}
+
+@media (max-width: 800px) {
+    .gallery{
+        grid-template-columns: auto;
+    }
 }
