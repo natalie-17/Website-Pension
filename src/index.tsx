@@ -5,6 +5,7 @@ import 'solid-devtools';
 import { Route, Router } from '@solidjs/router';
 import Homepage from './pages/homepage';
 import NotFound from './pages/404';
+import Honigverkostung from './pages/honey';
 
 const root = document.getElementById('root');
 
@@ -17,6 +18,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(() => (
   <Router>
     <Route path="/" component={Homepage}/>
+    <Route path="/honigverkostung" component={Honigverkostung}/>
     <Route path="*" component={NotFound} />
   </Router>),
-  root!);
+root!);
