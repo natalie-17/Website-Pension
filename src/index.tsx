@@ -6,6 +6,9 @@ import { Route, Router } from '@solidjs/router';
 import Homepage from './pages/homepage';
 import NotFound from './pages/404';
 import Honigverkostung from './pages/honey';
+import { Component, ComponentProps } from 'solid-js';
+import Footer from './components/footer';
+import Header from './components/header';
 
 const root = document.getElementById('root');
 
@@ -15,8 +18,18 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
+const Layout: Component = (props: any) => {
+  return (
+    <>
+      <Header/>
+      {props.children}
+      <Footer/>
+    </>
+  )
+}
+
 render(() => (
-  <Router>
+  <Router root={Layout}>
     <Route path="/" component={Homepage}/>
     <Route path="/honigverkostung" component={Honigverkostung}/>
     <Route path="*" component={NotFound} />
