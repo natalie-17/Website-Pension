@@ -12,7 +12,7 @@ const NavDropdown: Component<NavDropdownProps> = (props: NavDropdownProps) => {
           <a href={props.href} class="transition-colors duration-300 group-hover:text-blue-600">
             {props.itemName}
           </a>
-            <ul class="absolute left-0 mt-2 w-60 rounded-lg bg-white shadow-lg
+            <ul class="absolute left-0 mt-2 w-60 rounded-lg overflow-hidden bg-white shadow-lg
             opacity-0 invisible -translate-y-2
             transition-all duration-300 ease-in-out
             group-hover:opacity-100

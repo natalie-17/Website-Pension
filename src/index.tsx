@@ -9,6 +9,7 @@ import Honigverkostung from './pages/honey';
 import { Component, ComponentProps } from 'solid-js';
 import Footer from './components/footer';
 import Header from './components/header';
+import { MetaProvider, Title } from '@solidjs/meta';
 
 const root = document.getElementById('root');
 
@@ -20,11 +21,14 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 const Layout: Component = (props: any) => {
   return (
-    <>
+    <MetaProvider>
+      <Title>Apartments Liebl</Title>
       <Header/>
-      {props.children}
+      <main class='min-h-screen mt-14'>
+        {props.children}
+      </main>
       <Footer/>
-    </>
+    </MetaProvider>
   )
 }
 
