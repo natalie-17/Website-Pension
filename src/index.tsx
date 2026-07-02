@@ -6,10 +6,12 @@ import { Route, Router } from '@solidjs/router';
 import Homepage from './pages/homepage';
 import NotFound from './pages/404';
 import Honigverkostung from './pages/honey';
-import { Component, ComponentProps } from 'solid-js';
+import { Component } from 'solid-js';
 import Footer from './components/footer';
 import Header from './components/header';
 import { MetaProvider, Title } from '@solidjs/meta';
+import Apartments from './pages/apartments';
+import ApartmentPage from './pages/apartment';
 
 const root = document.getElementById('root');
 
@@ -24,7 +26,7 @@ const Layout: Component = (props: any) => {
     <MetaProvider>
       <Title>Apartments Liebl</Title>
       <Header/>
-      <main class='min-h-screen mt-14'>
+      <main class='min-h-screen pt-14'>
         {props.children}
       </main>
       <Footer/>
@@ -36,6 +38,8 @@ render(() => (
   <Router root={Layout}>
     <Route path="/" component={Homepage}/>
     <Route path="/honigverkostung" component={Honigverkostung}/>
+    <Route path="/apartments" component={Apartments}/>
+    <Route path="/apartments/:spitzname" component={ApartmentPage} />
     <Route path="*" component={NotFound} />
   </Router>),
 root!);
