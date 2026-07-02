@@ -1,5 +1,5 @@
 import { A } from '@solidjs/router';
-import { createSignal, onMount, type Component } from 'solid-js';
+import { createSignal, For, onMount, type Component } from 'solid-js';
 import NavItem from './navigation/nav-item';
 import NavDropdown from './navigation/nav-dropdown';
 import NavDropdownItem from './navigation/nav-dropdown-item';
@@ -29,12 +29,14 @@ const Header: Component = () => {
             <NavDropdownItem href='/ausflugsziele' itemName='Ausflugsziele'/>
           </NavDropdown>
           <NavDropdown href='/apartments' itemName='Apartments'>
-            {apartments().map((apartment) => (
-              <NavDropdownItem
-                itemName={`${apartment.name} "${apartment.spitzname}"`}
-                href={`/apartments/${apartment.spitzname}`}
-              />
-            ))}
+            <For each={apartments()}>
+              {(apartment) => (
+                <NavDropdownItem
+                  itemName={`${apartment.name} "${apartment.spitzname}"`}
+                  href={`/apartments/${apartment.spitzname}`}
+                />
+              )}
+            </For>
           </NavDropdown>
           <NavItem href='/preise' itemName='Preise'/>
           <NavItem href='/honigverkostung' itemName='Honigverkostung'/>

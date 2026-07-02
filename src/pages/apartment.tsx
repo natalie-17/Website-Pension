@@ -1,4 +1,4 @@
-import { createResource, Show, type Component } from 'solid-js';
+import { createResource, For, Show, type Component } from 'solid-js';
 import PolaroidApartments from '../components/polaroidApartments';
 import { useParams } from '@solidjs/router';
 import pb from '../lib/pocketbase';
@@ -24,6 +24,14 @@ const ApartmentPage: Component = () => {
         href={`/apartments/${apartment().spitzname}`}
         />
         <p>{apartment().beschreibung}</p>
+        <For each={apartment().bilder}>
+          {(bild) => (
+            <img
+              src={pb.files.getURL(apartment(), bild)}
+              alt={apartment().spitzname}
+            />
+          )}
+        </For>
         </>
     )}
     </Show>

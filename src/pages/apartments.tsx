@@ -1,4 +1,4 @@
-import { createSignal, onMount, type Component } from "solid-js";
+import { createSignal, For, onMount, type Component } from "solid-js";
 import PolaroidApartments from "../components/polaroidApartments";
 import pb, { getApartments } from "../lib/pocketbase";
 import { RecordModel } from "pocketbase";
@@ -17,13 +17,15 @@ const Apartments: Component = () => {
       </h1>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-        {apartments().map((apartment) => (
-          <PolaroidApartments
-            name={`${apartment.name} "${apartment.spitzname}"`}
-            image={pb.files.getURL(apartment, apartment.bilder[0])}
-            href={`/apartments/${apartment.spitzname}`}
-          />
-        ))}
+        <For each={apartments()}>
+          {(apartment) => (
+            <PolaroidApartments
+              name={`${apartment.name} "${apartment.spitzname}"`}
+              image={pb.files.getURL(apartment, apartment.bilder[0])}
+              href={`/apartments/${apartment.spitzname}`}
+            />
+          )}
+        </For>
       </div>
     </>
   );
