@@ -3,7 +3,7 @@ import { NavDropdown } from "./NavDropdown";
 import { NavItem } from "./NavItem";
 import { client } from "../lib/directus";
 import { readItems } from "@directus/sdk";
-import { For, Show } from "solid-js";
+import { For, Show, Suspense } from "solid-js";
 
 const getApartments = query(async () => {
   "use server";
@@ -18,8 +18,6 @@ export const route = {
 export default function Header() {
   const apartments = createAsyncStore(() => getApartments());
 
-  console.log(apartments());
-
   return (
     <header class="fixed top-0 left-0 z-50 w-full shadow bg-white flex items-center justify-between px-10 py-1">
       <A href="/" class="flex items-center gap-4">
@@ -33,13 +31,13 @@ export default function Header() {
             <NavItem href="/ausflugsziele" text="Ausflugsziele" />
           </NavDropdown>
           <NavDropdown href="/apartments" text="Apartments" >
-            <Show when={apartments()}>
+            <Suspense>
               <For each={apartments()}>
                 {(apartment:any) => (
                   <NavItem href={`/apartments/${apartment.id}`} text={apartment.id} />
                 )}
               </For>
-            </Show>
+            </Suspense>
           </NavDropdown>
           <NavItem href="/preise" text="Preise" />
           <NavItem href="/honigverkostung" text="Honigverkostung" />
