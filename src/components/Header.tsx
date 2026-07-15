@@ -3,17 +3,13 @@ import { NavDropdown } from "./NavDropdown";
 import { NavItem } from "./NavItem";
 import { client } from "../lib/directus";
 import { readItems } from "@directus/sdk";
-import { For, Show, Suspense } from "solid-js";
+import { For, Suspense } from "solid-js";
 
 const getApartments = query(async () => {
   "use server";
   const apartments = await client.request(readItems("apartments"));
   return apartments;
 }, "apartments");
-
-export const route = {
-  preload: () => getApartments()
-};
 
 export default function Header() {
   const apartments = createAsyncStore(() => getApartments());
