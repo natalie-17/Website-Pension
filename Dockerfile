@@ -1,16 +1,7 @@
-# Build stage
-FROM node:22-alpine AS builder
+FROM node:22-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
-
-# Production stage
-FROM node:22-alpine
-WORKDIR /app
-COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/package*.json ./
-RUN npm ci --omit=dev
 EXPOSE 3000
-CMD ["node", ".output/server/index.mjs"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
