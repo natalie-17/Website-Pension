@@ -1,4 +1,4 @@
-import { A, createAsync, query } from "@solidjs/router";
+import { A, createAsyncStore, query } from "@solidjs/router";
 import { NavDropdown } from "./NavDropdown";
 import { NavItem } from "./NavItem";
 import { client } from "../lib/directus";
@@ -16,7 +16,7 @@ export const route = {
 };
 
 export default function Header() {
-  const apartments = createAsync(() => getApartments());
+  const apartments = createAsyncStore(() => getApartments());
 
   console.log(apartments());
 
