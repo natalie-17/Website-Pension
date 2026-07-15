@@ -1,1 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Cormorant Garamond", serif;
+
+  --color-cream: #f4efe6;
+  --color-cream-dark: #e8e0d4;
+  --color-charcoal: #1c1c1c;
+  --color-charcoal-light: #2a2a2a;
+  --color-rust: #c45a2b;
+  --color-rust-dark: #a34822;
+  --color-sage: #5c6b4f;
+  --color-sage-light: #7a8a6c;
+  --color-stone-muted: #8a8278;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.section-label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--color-rust);
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 2rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-rust-dark);
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 2px solid white;
+  color: white;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 2rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background-color: white;
+  color: var(--color-charcoal);
+}
+
+.page-inner {
+  padding-top: 5rem;
+}

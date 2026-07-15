@@ -11,7 +11,7 @@ export default function App() {
       root={props => (
         <>
           <Header />
-          <main class="min-h-screen pt-14">
+          <main class="min-h-screen">
             <Suspense>{props.children}</Suspense>
           </main>
           <Footer />

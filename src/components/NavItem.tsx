@@ -15,8 +15,8 @@ export function NavItem(props: NavItemProps) {
       <A
         class={
           inDropdown
-            ? "block px-4 py-2 hover:bg-blue-100"
-            : "transition-colors duration-300 hover:text-blue-600"
+            ? "block px-4 py-2.5 text-charcoal transition-colors hover:bg-cream hover:text-rust"
+            : "section-label text-sm text-white/90 transition-colors hover:text-rust"
         }
         href={props.href}
       >
