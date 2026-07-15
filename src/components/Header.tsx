@@ -11,10 +11,6 @@ const getApartments = query(async () => {
   return apartments;
 }, "apartments");
 
-export const route = {
-  preload: () => getApartments()
-};
-
 export default function Header() {
   const apartments = createAsyncStore(() => getApartments());
 
