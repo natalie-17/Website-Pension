@@ -3,7 +3,7 @@ import { NavDropdown } from "./NavDropdown";
 import { NavItem } from "./NavItem";
 import { client } from "../lib/directus";
 import { readItems } from "@directus/sdk";
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 
 const getApartments = query(async () => {
   "use server";
@@ -33,11 +33,13 @@ export default function Header() {
             <NavItem href="/ausflugsziele" text="Ausflugsziele" />
           </NavDropdown>
           <NavDropdown href="/apartments" text="Apartments" >
-            <For each={apartments()}>
-              {(apartment:any) => (
-                <NavItem href={`/apartments/${apartment.id}`} text={apartment.id} />
-              )}
-            </For>
+            <Show when={apartments()}>
+              <For each={apartments()}>
+                {(apartment:any) => (
+                  <NavItem href={`/apartments/${apartment.id}`} text={apartment.id} />
+                )}
+              </For>
+            </Show>
           </NavDropdown>
           <NavItem href="/preise" text="Preise" />
           <NavItem href="/honigverkostung" text="Honigverkostung" />
