@@ -1,28 +1,7 @@
 import { A, createAsyncStore, query } from "@solidjs/router";
-import { readItems } from "@directus/sdk";
 import { BOOKING_URL } from "../lib/booking";
-import { client } from "../lib/directus";
 import { For, Suspense } from "solid-js";
 import { Event } from "../components/Event";
-
-const getEvents = query(async () => {
-  "use server";
-  const events = await client.request(readItems("events"));
-  return events;
-}, "events");
-
-const getApartments = query(async () => {
-  "use server";
-  const apartments: any[] = await client.request(readItems("apartments"));
-  return apartments.map((apartment) => {
-    const titelbild =
-      typeof apartment.titelbild === "string" ? apartment.titelbild : apartment.titelbild?.id;
-    return {
-      ...apartment,
-      titelbildUrl: titelbild ? new URL(`assets/${titelbild}`, client.url).href : null,
-    };
-  });
-}, "home-apartments");
 
 const features = [
   {
@@ -52,8 +31,6 @@ const features = [
 ];
 
 export default function Home() {
-  const events = createAsyncStore(() => getEvents());
-  const apartments = createAsyncStore(() => getApartments());
 
   return (
     <>
@@ -110,40 +87,6 @@ export default function Home() {
           <h2 class="mt-2 text-center font-display text-4xl tracking-wide sm:text-5xl">
             Wählen Sie Ihr Apartment
           </h2>
-          <Suspense>
-            <ul class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <For each={apartments()}>
-                {(apartment: any) => (
-                  <li>
-                    <A
-                      href={`/apartments/${apartment.id}`}
-                      class="group relative block aspect-[4/5] overflow-hidden"
-                    >
-                      {apartment.titelbildUrl ? (
-                        <img
-                          src={apartment.titelbildUrl}
-                          alt={apartment.titel ?? apartment.id}
-                          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div class="absolute inset-0 bg-sage" />
-                      )}
-                      <div class="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent" />
-                      <div class="absolute inset-x-0 bottom-0 p-6 text-white">
-                        <p class="section-label text-xs text-rust">Apartment</p>
-                        <h3 class="font-display text-3xl tracking-wide">
-                          {apartment.titel ?? apartment.id}
-                        </h3>
-                        <span class="mt-3 inline-block section-label text-sm opacity-0 transition-opacity group-hover:opacity-100">
-                          Entdecken →
-                        </span>
-                      </div>
-                    </A>
-                  </li>
-                )}
-              </For>
-            </ul>
-          </Suspense>
           <div class="mt-10 text-center">
             <A href="/apartments" class="btn-primary">
               Alle Apartments
@@ -196,27 +139,6 @@ export default function Home() {
               Mehr erfahren
             </A>
           </div>
-        </div>
-      </section>
-
-      {/* Events */}
-      <section class="bg-cream-dark px-6 py-20 lg:px-10">
-        <div class="mx-auto max-w-4xl">
-          <p class="section-label text-center text-rust">Veranstaltungen</p>
-          <h2 class="mt-2 text-center font-display text-4xl tracking-wide sm:text-5xl">
-            Immer etwas zu erleben
-          </h2>
-          <Suspense>
-            <ul class="mt-12 space-y-8">
-              <For each={events()}>
-                {(event: any) => (
-                  <li>
-                    <Event id={event.id} />
-                  </li>
-                )}
-              </For>
-            </ul>
-          </Suspense>
         </div>
       </section>
 

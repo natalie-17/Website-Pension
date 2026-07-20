@@ -2,18 +2,9 @@ import { A, createAsyncStore, query } from "@solidjs/router";
 import { NavDropdown } from "./NavDropdown";
 import { NavItem } from "./NavItem";
 import { BOOKING_URL } from "../lib/booking";
-import { client } from "../lib/directus";
-import { readItems } from "@directus/sdk";
 import { createSignal, For, onMount, Show, Suspense } from "solid-js";
 
-const getApartments = query(async () => {
-  "use server";
-  const apartments = await client.request(readItems("apartments"));
-  return apartments;
-}, "apartments");
-
 export default function Header() {
-  const apartments = createAsyncStore(() => getApartments());
   const [menuOpen, setMenuOpen] = createSignal(false);
   const [scrolled, setScrolled] = createSignal(false);
 
@@ -47,13 +38,8 @@ export default function Header() {
               <NavItem href="/ausflugsziele" text="Ausflugsziele" />
             </NavDropdown>
             <NavDropdown href="/apartments" text="Apartments">
-              <Suspense>
-                <For each={apartments()}>
-                  {(apartment: any) => (
-                    <NavItem href={`/apartments/${apartment.id}`} text={apartment.id} />
-                  )}
-                </For>
-              </Suspense>
+              <NavItem href="apartments/lusen" text="Lusen" />
+                  
             </NavDropdown>
             <NavItem href="/preise" text="Preise" />
             <NavItem href="/honigverkostung" text="Honigverkostung" />
